@@ -1,10 +1,3 @@
-CREATE TABLE board_answer (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    question_id INT NOT NULL,
-    content TEXT NOT NULL,
-    author VARCHAR(50),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (question_id) REFERENCES board_question(id) ON DELETE CASCADE,
-    FOREIGN KEY (author) REFERENCES members(id)
-);
+version https://git-lfs.github.com/spec/v1
+oid sha256:25f086437f9e3447cea8c5326336391d5d3c5f6e03c26d1b6071ac3811449c88
+size 528
