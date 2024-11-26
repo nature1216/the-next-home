@@ -280,12 +280,12 @@ const fetchRandomImage = async () => {
 
 .close-button {
   top: 10px;
-  right: 20px;
+  right: 10px;
 }
 
 .bookmark-button {
-  top: 45px; /* 닫기 버튼 아래에 위치 */
-  right: 20px;
+  top: 50px; /* 닫기 버튼 아래에 위치 */
+  right: 10px;
 }
 
 .close-button:hover,
