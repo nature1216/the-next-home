@@ -11,7 +11,6 @@ watch(
   (newVal) => {
     key.value = newVal;
     emit("onKeySelect", key.value);
-    console.log("Vselect:" , key.value);
   }
 );
 

@@ -21,6 +21,7 @@
 
 <script>
 import {getQuestionDetails, updateQuestion} from "@/api/board";
+import {toast} from "vue3-toastify";
 
 export default {
   name: "EditQuestion",
@@ -42,7 +43,7 @@ export default {
         const response = await getQuestionDetails(questionId);
         this.question = response.data;
       } catch (error) {
-        console.error("질문 상세 조회 중 오류 발생:", error);
+        toast.error("질문 상세 조회 중 오류 발생:", error);
       }
     },
     async submitEdit() {
@@ -51,7 +52,7 @@ export default {
         await updateQuestion(questionId, this.question);
         this.$router.push({name: "BoardQuestionDetails", params: {questionId}});
       } catch (error) {
-        console.error("질문 수정 중 오류 발생:", error);
+        toast.error("질문 수정 중 오류 발생:", error);
       }
     },
   },

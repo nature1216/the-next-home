@@ -14,11 +14,9 @@ const handleSubmit = () => {
       id: userId.value
     },
     ({ data }) => {
-      console.log(data);
       toast.info("이메일 전송이 완료되었습니다.")
     },
     (error) => {
-      console.log(error.status);
       if (error.status === 404) {
         errorMessage.value = "입력하신 정보로 등록된 계정을 찾을 수 없습니다.";
       } else {

@@ -6,7 +6,6 @@ const props = defineProps({
 })
 
 onUpdated(() => {
-    console.log(props.item);
 })
 </script>
 

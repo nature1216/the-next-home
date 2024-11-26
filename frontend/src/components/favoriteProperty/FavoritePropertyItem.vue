@@ -63,6 +63,7 @@
 <script>
 import { deleteFavoriteProperty } from "@/api/favoriteProperty.js";
 import { fetchUnsplashImage } from "@/api/image";
+import {toast} from "vue3-toastify";
 
 export default {
   name: "FavoritePropertyItem",
@@ -89,7 +90,7 @@ export default {
           this.$emit("remove", this.property.aptSeq);
         },
         (error) => {
-          console.error("Error removing property", error);
+          toast.error("Error removing property", error);
         }
       );
     },

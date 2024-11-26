@@ -12,7 +12,6 @@ const props = defineProps({
 watch(() => props.total,
 (newVal) => {
     total.value = newVal;
-    console.log(newVal);
 })
 
 const total = ref(props.total); // 전체 item 개수

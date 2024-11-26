@@ -39,6 +39,7 @@ import { searchKeyword } from "@/api/search";
 import { useHouseDealStore } from "@/stores/houseDealStore";
 import { useAuthStore } from "@/stores/authStore";
 import SearchBoxResult from "@/components/common/SearchBoxResult.vue";
+import {toast} from "vue3-toastify";
 
 defineEmits(["onSearch"]);
 
@@ -71,7 +72,7 @@ const onSearch = () => {
       authLinkMarginBtm.value = "0px";
       },
     (error) => {
-      console.log(error);
+      toast.error(error);
     }
   );
 };

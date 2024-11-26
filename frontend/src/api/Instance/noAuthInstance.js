@@ -12,7 +12,6 @@ function api() {
     withCredentials: true,
   });
   instance.interceptors.request.use((config) => {
-    console.log(`${config.url}`);
     return config;
   });
   return instance;

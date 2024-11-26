@@ -3,7 +3,6 @@ import { api } from "./Instance/noAuthInstance";
 const houseDealApi = api();
 
 function getHouseDealByKeyword(param, success, fail) {
-  console.log(param);
   houseDealApi
     .get("/house/keyword", {
       params: {

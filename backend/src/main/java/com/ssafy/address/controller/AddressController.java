@@ -39,7 +39,6 @@ public class AddressController {
 	public ResponseEntity<String> addAddress(@AuthenticationPrincipal
 	String memberId, @RequestBody
 	AddressDto addressDto) {
-		System.out.println("추가 " + addressDto);
 		addressDto.setMemberId(memberId);
 		addressService.addAddress(addressDto);
 		return ResponseEntity.ok("주소가 추가되었습니다.");
@@ -53,7 +52,6 @@ public class AddressController {
 		@RequestBody
 		AddressDto addressDto) {
 
-		System.out.println(addressDto);
 		addressDto.setMemberId(memberId);
 		addressDto.setAddressId(addressId); // 주소 ID를 DTO에 설정
 		addressService.updateAddress(addressDto);

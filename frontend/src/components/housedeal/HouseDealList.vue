@@ -17,7 +17,6 @@ const result = ref([]);
 const total = ref(props.total);
 
 onMounted(() => {
-    console.log(props.total);
 })
 
 watch(() => props.list,
@@ -28,7 +27,6 @@ watch(() => props.list,
 watch(
     () => props.total,
     (newVal) => {
-        console.log(newVal);
         total.value = newVal;
     }
 )

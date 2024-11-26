@@ -24,7 +24,7 @@ onMounted(() => {
       }
     },
     (error) => {
-      console.log(error);
+      toast.error(error);
     }
   )
 })
@@ -40,7 +40,6 @@ const handleSubmit = () => {
         uuid: route.query.uuid
       },
       (response) => {
-        console.log(response);
         if (response.status == 200) {
           toast.info("비밀번호가 변경되었습니다. 로그인 화면으로 이동합니다.", { autoClose: false });
           setTimeout(() => {

@@ -23,6 +23,7 @@
 <script>
 import { getFavoriteProperties } from "@/api/favoriteProperty.js";
 import FavoritePropertyItem from "@/components/favoriteProperty/FavoritePropertyItem.vue";
+import {toast} from "vue3-toastify";
 
 export default {
   name: "FavoritePropertyList",
@@ -41,11 +42,10 @@ export default {
     fetchFavoriteProperties() {
       getFavoriteProperties(
         (response) => {
-          console.log(response.data);
           this.favoriteProperties = response.data; // 매물 정보 로드
         },
         (error) => {
-          console.error("Error fetching favorite properties", error);
+          toast.error("Error fetching favorite properties", error);
         }
       );
     },

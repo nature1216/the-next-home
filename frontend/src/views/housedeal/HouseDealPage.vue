@@ -10,6 +10,7 @@ import { useHouseDealStore } from "@/stores/houseDealStore";
 import MapResult from "@/components/common/MapResult.vue";
 import HouseDealFilter from "@/components/housedeal/HouseDealFilter.vue";
 import HouseDealDetail from "@/components/housedeal/HouseDealDetail.vue";
+import {toast} from "vue3-toastify";
 
 const route = useRoute();
 const houseDealStore = useHouseDealStore();
@@ -41,8 +42,6 @@ onMounted(() => {
 
 // query나 params가 변경되었을 때 실행(e.g. houseDealPage에서 재검색)
 onBeforeRouteUpdate((to, from, next) => {
-  console.log("route updated!", from.query, " to ", to.query);
-
   getResultList(to.query.type, to.query.keyword);
   getCountResult(to.query.type, to.query.keyword);
 
@@ -56,7 +55,6 @@ onBeforeRouteUpdate((to, from, next) => {
 watch(
   () => houseDealStore.pgno,
   (newVal) => {
-    console.log("pgno changed,", type, keyword);
     getResultList(type.value, keyword.value, newVal);
   }
 );
@@ -82,11 +80,10 @@ const getResultList = (type, keyword, pgno = houseDealStore.pgno) => {
       sort: houseDealStore.sort,
     },
     ({ data }) => {
-      console.log("getResultList: ", data);
       result.value = data;
     },
     (error) => {
-      console.log(error);
+      toast.error(error);
     }
   );
 };
@@ -98,11 +95,10 @@ const getCountResult = (type, keyword) => {
       keyword: keyword,
     },
     ({ data }) => {
-      console.log("result count: ", data);
       total.value = data;
     },
     (error) => {
-      console.log(error);
+      toast.error(error);
     }
   );
 };
@@ -126,10 +122,10 @@ const closeDetail = () => {
     <div class="map-container">
       <MapResult :clickedItem="clickedItem" />
       <div class="detail-overlay">
-        <HouseDealDetail 
-          v-if="isDetailVisible" 
-          class="sidebar" 
-          :isVisible="isDetailVisible" 
+        <HouseDealDetail
+          v-if="isDetailVisible"
+          class="sidebar"
+          :isVisible="isDetailVisible"
           :key="clickedItem.aptSeq"
           @closeDetail="closeDetail"
           :clickedItem="clickedItem"

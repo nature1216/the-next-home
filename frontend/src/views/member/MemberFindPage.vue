@@ -14,8 +14,6 @@ const foundId = ref("");
 const errorMessage = ref("");
 
 const onFindId = (data) => {
-  console.log("onFineId", data);
-
   if (data) {
     isIdFormLoaded.value = false;
     foundId.value = data;
@@ -41,21 +39,21 @@ const maskId = (id) => {
     <el-tabs v-model="activeName">
       <el-tab-pane label="아이디 찾기" name="findId">
         <!-- ID 찾기 폼 -->
-        <MemberIdFindForm 
-          v-if="isIdFormLoaded" 
-          @onFindId="onFindId" 
+        <MemberIdFindForm
+          v-if="isIdFormLoaded"
+          @onFindId="onFindId"
         />
-        
+
         <!-- 에러 메시지 -->
         <div v-if="errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
-        
+
         <!-- ID 찾기 결과 -->
-        <MemberIdFindResult 
-          v-if="!isIdFormLoaded" 
-          :foundId="maskId(foundId)" 
-          @goBack="isIdFormLoaded = true" 
+        <MemberIdFindResult
+          v-if="!isIdFormLoaded"
+          :foundId="maskId(foundId)"
+          @goBack="isIdFormLoaded = true"
         />
       </el-tab-pane>
       <el-tab-pane label="비밀번호 찾기" name="findPassword">

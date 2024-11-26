@@ -20,6 +20,7 @@
 <script>
 import {getQuestionDetails, deleteQuestion} from "@/api/board";
 import {useAuthStore} from "@/stores/authStore";
+import {toast} from "vue3-toastify";
 
 export default {
   name: "QuestionDetails",
@@ -55,7 +56,7 @@ export default {
         const response = await getQuestionDetails(this.questionId);
         this.question = response.data;
       } catch (error) {
-        console.error("질문 상세 조회 중 오류 발생:", error);
+        toast.error("질문 상세 조회 중 오류 발생:", error);
       }
     },
     editQuestion() {
@@ -70,7 +71,7 @@ export default {
           this.$router.push({name: "BoardList"}); // 삭제 후 게시판 목록으로 이동
         });
       } catch (error) {
-        console.error("삭제 실패", error);
+        toast.error("삭제 실패:", error);
       }
     },
   },

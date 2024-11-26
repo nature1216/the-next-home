@@ -12,6 +12,7 @@
 <script>
 import {createAnswer} from "@/api/board";
 import {useAuthStore} from "@/stores/authStore";
+import {toast} from "vue3-toastify";
 
 export default {
   name: "AnswerForm",
@@ -36,7 +37,7 @@ export default {
         this.newAnswer = "";
         this.$emit("answerSubmitted");
       } catch (error) {
-        console.error("답변 등록 중 오류 발생:", error);
+        toast.error("답변 등록 중 오류 발생:", error);
       }
     },
   },
