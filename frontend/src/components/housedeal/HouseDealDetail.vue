@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits, defineProps, watch, onMounted } from "vue";
+import { ref, defineEmits, defineProps, watch, onMounted, onUpdated } from "vue";
 import {
   createFavoriteProperty,
   deleteFavoriteProperty,
@@ -28,8 +28,12 @@ const localDealList = ref([]);
 const loadingImage = ref(true);
 
 onMounted(() => {
-  console.log("Item clicked: ", props.clickedItem);
+  console.log("mounted");
   fetchRandomImage();
+});
+
+onUpdated(() => {
+  console.log("Item clicked: ", props.clickedItem);
   if (authStore.isLoggedIn) {
     // 로그인했을 때만 북마크 여부 확인
     existsFavoritePropertyByAptSeqAndId(
@@ -42,7 +46,7 @@ onMounted(() => {
       }
     );
   }
-});
+})
 
 const closeDetail = () => {
   emit("closeDetail");
@@ -74,6 +78,7 @@ const onClickBookmark = () => {
     deleteFavoriteProperty(
       props.clickedItem.aptSeq,
       ({ data }) => {
+        bookmarked.value = false;
         console.log(data);
       },
       (error) => {
