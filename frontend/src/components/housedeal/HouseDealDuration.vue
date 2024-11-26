@@ -3,7 +3,6 @@ import { getAddressByMemberId } from '@/api/address';
 import { geocode, getCarDuration, getTransitDuration, getWalkDuration } from '@/api/duration';
 import { onMounted, ref, defineProps, watch } from 'vue';
 import { useHouseDealStore } from '@/stores/houseDealStore';
-import {toast} from "vue3-toastify";
 
 const props = defineProps({
     lat: String,
@@ -15,8 +14,9 @@ onMounted(async () => {
     try {
         await getDepartures();
         getDurations(selectedDeparture.value);
+        console.log("Departures loaded:", departures.value);
     } catch (error) {
-        toast.error("Failed to load departures:", error);
+        console.error("Failed to load departures:", error);
     }
 });
 
@@ -27,6 +27,7 @@ const selectedDeparture = ref();
 
 watch(selectedDeparture, (newValue) => {
     houseDealStore.setSelectedDeparture(newValue);
+    console.log("selectedDeparture changed:", houseDealStore.selectedDeparture);
 });
 
 const getDepartures = async () => {
@@ -39,6 +40,7 @@ const getDepartures = async () => {
             );
         });
 
+        console.log("getDepartures:", data);
 
         // departures 배열 초기화
         departures.value = await Promise.all(
@@ -53,12 +55,14 @@ const getDepartures = async () => {
             })
 
         );
+        console.log(departures);
 
         if (departures.value.length >= 1) {
             selectedDeparture.value = departures.value[0];
+            console.log("selectedDeparture:", selectedDeparture.value);
         }
     } catch (error) {
-        toast.error("Error in getDepartures:", error);
+        console.error("Error in getDepartures:", error);
         throw error; // 에러 발생 시 상위 호출자에게 전달
     }
 };
@@ -68,6 +72,7 @@ const routeTimes = ref([]);
 const isLoading = ref(false);
 
 const getDurations = async (departure) => {
+    console.log(departure);
     isLoading.value = true;
 
     const params = {
@@ -86,16 +91,17 @@ const getDurations = async (departure) => {
                     name: "승용차",
                     duration: formatTime(data.totalTime)
                 })
+                console.log("getCarDuration", data);
             },
             (error) => {
                 routeTimes.value.push({
                     name: "승용차",
                     duration: "측정불가"
                 })
-                toast.error(error);
+                console.log(error);
             }
         );
-
+    
         // await getTransitDuration(
         //     params,
         //     ({data}) => {
@@ -113,33 +119,35 @@ const getDurations = async (departure) => {
         //         console.log(error);
         //     }
         // )
-
+    
         // 대중교통 dump data
         routeTimes.value.push({
                     name: "대중교통",
                     duration: "측정불가"
                 });
-
-        await getWalkDuration({
-            ...params,
-            startName: departure.name,
-            endName: "매물"
-        },
-        ({data}) => {
-            routeTimes.value.push({
-                    name: "도보",
-                    duration: formatTime(data.totalTime)
-                })
-        },
-        (error) => {
-            routeTimes.value.push({
-                    name: "도보",
-                    duration: "측정불가"
-                })
-        })
+    
+        // await getWalkDuration({
+        //     ...params,
+        //     startName: departure.name,
+        //     endName: "매물"
+        // },
+        // ({data}) => {
+        //     routeTimes.value.push({
+        //             name: "도보",
+        //             duration: formatTime(data.totalTime)
+        //         })
+        //     console.log("getWalkDuration", data);
+        // },
+        // (error) => {
+        //     routeTimes.value.push({
+        //             name: "도보",
+        //             duration: "측정불가"
+        //         })
+        //     console.log(error);
+        // })
 
     } catch(error) {
-        toast.error("Error in getDurations: ", error);
+        console.log("Error in getDurations: ", error);
     } finally {
         isLoading.value = false;
     }
@@ -157,6 +165,7 @@ const formatTime = (seconds) => {
 
 const onChange = () => {
     routeTimes.value = [];
+    console.log("onChange", selectedDeparture.value);
     getDurations(selectedDeparture.value);
 }
 
@@ -185,8 +194,8 @@ const onChange = () => {
                 <!-- 로딩 완료 -->
                 <ul>
                     <li v-for="(mode, index) in routeTimes" :key="index">
-                        <strong>{{ mode.name }}:</strong>
-                        <span class="duration-value animated-slide-in"
+                        <strong>{{ mode.name }}:</strong> 
+                        <span class="duration-value animated-slide-in" 
                               :style="{ animationDelay: `${index * 0.3}s` }">
                             {{ mode.duration }}
                         </span>
@@ -197,7 +206,7 @@ const onChange = () => {
     </div>
 </template>
 
-
+  
 <style scoped>
 .route-time-component {
   margin: auto;
