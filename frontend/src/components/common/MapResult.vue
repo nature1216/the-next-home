@@ -50,7 +50,7 @@ watch(
             imageHeight: 35,
             imageOptions: {}
         };
-        
+
         markerInfoList.value.push({
             key: 2,
             lat: newObj.coordinates.latitude,
@@ -67,15 +67,13 @@ const onLoadKakaoMap = (mapRef) => {
 }
 
 const setBounds = () => {
-    console.log("setBounds", markerInfoList.value);
     let point;
-    console.log(markerInfoList.value);
     markerInfoList.value.forEach((markerInfo) => {
         point = new kakao.maps.LatLng(markerInfo.lat, markerInfo.lng);
-        
+
         bounds.extend(point);
     });
-    
+
     if(map.value !== undefined) {
         map.value.setBounds(bounds);
     }

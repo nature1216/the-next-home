@@ -132,7 +132,6 @@ export default {
           password: this.password,
           address: this.address.address, // 주소
         };
-        console.log(memberData);
 
         // 회원가입 요청
         const response = await signup(memberData);
@@ -152,10 +151,9 @@ export default {
           this.emailSent = true;
         },
         (error) => {
-          console.log(error);
+          toast.error("인증번호 전송에 실패하였습니다", error);
         }
       )
-      console.log("이메일 인증번호 전송");
     },
     verifySignUpCode() {
       verifySignUpCode(
@@ -173,7 +171,7 @@ export default {
           }
         },
         (error) => {
-          console.log(error);
+          toast.error(error);
         }
       )
     }

@@ -9,6 +9,7 @@ import { useAuthStore } from "@/stores/authStore";
 import HouseDealDuration from "./HouseDealDuration.vue";
 import HouseDealGraph from "./item/HouseDealGraph.vue";
 import { fetchUnsplashImage } from "@/api/image";
+import {toast} from "vue3-toastify";
 
 const emit = defineEmits(["closeDetail"]);
 const props = defineProps({
@@ -28,12 +29,10 @@ const localDealList = ref([]);
 const loadingImage = ref(true);
 
 onMounted(() => {
-  console.log("mounted");
   fetchRandomImage();
 });
 
 onUpdated(() => {
-  console.log("Item clicked: ", props.clickedItem);
   if (authStore.isLoggedIn) {
     // 로그인했을 때만 북마크 여부 확인
     existsFavoritePropertyByAptSeqAndId(
@@ -42,7 +41,7 @@ onUpdated(() => {
         bookmarked.value = data;
       },
       (error) => {
-        console.log(error);
+        toast.error(error);
       }
     );
   }
@@ -62,27 +61,22 @@ const onClickBookmark = () => {
         aptSeq: props.clickedItem.aptSeq,
       },
       ({ data }) => {
-        console.log(props.clickedItem);
-        console.log(data);
         bookmarked.value = true;
-        console.log(bookmarked.value);
         bookmarked.value = !bookmarked.value;
       },
       (error) => {
-        console.log(error);
+        toast.error(error);
       }
     );
   } else {
     // 북마크 삭제
-    console.log("북마크 삭제됨");
     deleteFavoriteProperty(
       props.clickedItem.aptSeq,
       ({ data }) => {
         bookmarked.value = false;
-        console.log(data);
       },
       (error) => {
-        console.log(error);
+        toast.error(error);
       }
     );
   }
@@ -90,11 +84,9 @@ const onClickBookmark = () => {
 
 const onClickDuration = () => {
   isVisibleDuration.value = !isVisibleDuration.value;
-  console.log(isVisibleDuration.value);
 };
 
 const sortDealList = () => {
-  console.log("sortDealList");
   localDealList.value.sort((a, b) => {
     const priceA = parseFloat(a.dealAmount.replace(/,/g, "")) || 0;
     const priceB = parseFloat(b.dealAmount.replace(/,/g, "")) || 0;
@@ -115,7 +107,6 @@ const sortDealList = () => {
 
 // `selectedSortFilter` 값 변경 감지
 watch(selectedSortFilter, () => {
-  console.log("정렬 기준 변경:", selectedSortFilter.value);
   sortDealList();
 });
 
@@ -135,7 +126,6 @@ watch(
 
 // image
 const fetchRandomImage = async () => {
-  console.log("fetchRand");
   const imageUrl = await fetchUnsplashImage("house");
   props.clickedItem.image = imageUrl || "/images/default-property-image.jpg";
   loadingImage.value = false;

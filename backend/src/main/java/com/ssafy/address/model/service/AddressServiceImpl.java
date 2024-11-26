@@ -15,7 +15,6 @@ public class AddressServiceImpl implements AddressService {
 
 	private final AddressMapper addressMapper;
 
-	// TODO : 예외 처리 추가
 	@Override
 	public List<AddressDto> getAddressByMemberId(String memberId) {
 		return addressMapper.selectAddressesByMemberId(memberId);

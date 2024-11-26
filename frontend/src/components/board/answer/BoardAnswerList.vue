@@ -42,6 +42,7 @@
 <script>
 import {getAnswers, updateAnswer, deleteAnswer} from "@/api/board";
 import {useAuthStore} from "@/stores/authStore";
+import {toast} from "vue3-toastify";
 
 export default {
   name: "AnswerList",
@@ -68,7 +69,7 @@ export default {
         const response = await getAnswers(this.questionId);
         this.answers = response.data;
       } catch (error) {
-        console.error("답변 목록 조회 중 오류 발생:", error);
+        toast.error("답변 목록 조회 중 오류 발생:", error);
       }
     },
     async deleteAnswer(answerId) {
@@ -76,7 +77,7 @@ export default {
         await deleteAnswer(answerId);
         this.fetchAnswers(); // 답변 삭제 후 목록 새로고침
       } catch (error) {
-        console.error("답변 삭제 중 오류 발생:", error);
+        toast.error("답변 삭제 중 오류 발생:", error);
       }
     },
     startEditing(answer) {
@@ -94,7 +95,7 @@ export default {
         this.editedContent = "";
         this.fetchAnswers();
       } catch (error) {
-        console.error("답변 수정 중 오류 발생:", error);
+        toast.error("답변 수정 중 오류 발생:");
       }
     },
     formatDate(dateString) {

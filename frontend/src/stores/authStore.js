@@ -30,7 +30,7 @@ export const useAuthStore = defineStore("auth", {
         const {exp} = jwtDecode(token);
         this.tokenExpiry = exp * 1000;
       } catch (error) {
-        console.error("Invalid token:", error);
+        // console.error("Invalid token:", error);
         this.logout();
       }
 

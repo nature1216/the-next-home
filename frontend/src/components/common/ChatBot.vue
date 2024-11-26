@@ -39,6 +39,7 @@
 
 <script>
 import { sendMessage } from "@/api/chatbot";
+import {toast} from "vue3-toastify";
 
 export default {
   data() {
@@ -69,7 +70,7 @@ export default {
         const response = await sendMessage(this.userMessage);
         this.chatHistory.push({ role: "bot", content: response.data.response });
       } catch (error) {
-        console.error("Error sending message:", error);
+        toast.error("Error sending message:", error);
         this.chatHistory.push({
           role: "bot",
           content: "서버에 문제가 발생했습니다. 다시 시도해주세요.",

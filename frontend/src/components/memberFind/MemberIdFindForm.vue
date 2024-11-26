@@ -1,6 +1,7 @@
 <script setup>
 import {findId} from "@/api/auth";
 import {ref, defineEmits} from 'vue';
+import {toast} from "vue3-toastify";
 
 const username = ref('');
 const email = ref('');
@@ -18,11 +19,9 @@ const handleSubmit = () => {
       emit('onFindId', data);
     },
     (error) => {
-      console.log(error);
+      toast.error(error);
     }
   )
-  console.log(username.value);
-  console.log(email.value);
 }
 
 </script>

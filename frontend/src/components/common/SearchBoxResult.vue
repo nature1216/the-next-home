@@ -20,7 +20,6 @@ watch(
     ((newVal) => {
         regions.value = newVal.regions;
         houses.value = newVal.houses;
-        console.log("변경 감지: ", houses.value);
     }),
     {
         immediate: true
@@ -37,7 +36,6 @@ function goDetail(type, data) {
     }
 
     houseDealStore.setPgno(1);
-    console.log("goDetail 호출", code, type, houseDealStore.pgno);
     router.push({
         name: "HouseDeal",
         query: {
@@ -45,7 +43,7 @@ function goDetail(type, data) {
             keyword: code
         }
     })
-    
+
 }
 
 </script>

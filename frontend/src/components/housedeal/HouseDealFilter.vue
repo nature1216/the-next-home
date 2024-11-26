@@ -5,6 +5,7 @@ import VSelect from "@/components/common/VSelect.vue";
 import { getFilter, searchKeyword } from "@/api/search";
 import { useHouseDealStore } from '@/stores/houseDealStore';
 import SearchBoxResult from '../common/SearchBoxResult.vue';
+import {toast} from "vue3-toastify";
 
 const props = defineProps({
     searchOption: Object
@@ -38,12 +39,9 @@ onMounted(() => {
             })
         }
     })
-
-    console.log(props.searchOption)
 })
 
 const onSearch = () => {
-    console.log("onSearch")
     searchKeyword(
         {
             sidoCode: selectedSido.value.slice(0,2),
@@ -59,26 +57,23 @@ const onSearch = () => {
             isLoaded.value = true;
         },
         (error) => {
-            console.log(error)
+            toast.error(error)
         }
     )
 }
 
 const onSelectSido = (code) => {
-    console.log("시도선택: ", code);
     selectedSido.value = code;
     getGugunFilter(code);
 }
 
 const onSelectGugun = (code) => {
-    console.log("구군선택: ", code)
     selectedGugun.value = code;
     getDongFilter(code);
 }
 
 const onSelectDong = (code) => {
     selectedDong.value = code;
-    console.log("동선택: ", code)
 }
 
 // then() 사용하기 위해 promise 반환
@@ -89,13 +84,12 @@ const getSidoFilter = (code) => {
                 param: code
             },
                 ({ data }) => {
-                console.log(data);
                 sidoOptions.value = data.map(({ dongCode, sidoName }) => ({ value: dongCode, label: sidoName}));
                 sidoOptions.value.unshift({ value: "00", label: "전체" })
                 resolve();
             },
             (error) => {
-                    console.log(error);
+                    toast.error(error);
                     reject(error);
             }
         );
@@ -103,7 +97,6 @@ const getSidoFilter = (code) => {
 }
 
 const getGugunFilter = (code) => {
-    console.log("getGugunFilter", code);
     return new Promise((resolve, reject) => {
         getFilter(
             {
@@ -114,11 +107,10 @@ const getGugunFilter = (code) => {
                     .filter(item => item.gugunName !== null)
                     .map(({ dongCode, gugunName }) => ({ value: dongCode, label: gugunName }));
                 gugunOptions.value.unshift({ value: "000", label: "전체" })
-                console.log(gugunOptions.value);
                 resolve();
             },
             (error) => {
-                console.log(error);
+                toast.error(error);
                 reject(error);
             }
         )
@@ -136,7 +128,6 @@ const getDongFilter = (code) => {
                 .filter(item => item.dongName !== null)
                 .map(({ dongCode, dongName }) => ({ value: dongCode, label: dongName }));
             dongOptions.value.unshift({ value: "00000", label: "전체" });
-            console.log(data);
         }
     )
 }

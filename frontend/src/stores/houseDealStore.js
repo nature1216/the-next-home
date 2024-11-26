@@ -27,7 +27,6 @@ export const useHouseDealStore = defineStore('housedeal', () => {
 
     const setKeyword = (input) => {
         keyword.value = input;
-        console.log("store keyword updated: ", keyword.value)
     }
 
     const setRegion = (sido, gugun, dong, code) => {
@@ -46,7 +45,6 @@ export const useHouseDealStore = defineStore('housedeal', () => {
     }
 
     const setSort = (newVal) => {
-        console.log(newVal);
         sort.value = newVal;
     }
 

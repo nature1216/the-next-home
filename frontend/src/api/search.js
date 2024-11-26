@@ -3,7 +3,6 @@ import { api } from "./Instance/noAuthInstance";
 const searchApi = api();
 
 function searchKeyword(param, success, fail) {
-  console.log(param);
   searchApi
     .get("/dong-code/search", {
       params: {
@@ -18,7 +17,6 @@ function searchKeyword(param, success, fail) {
 }
 
 function getFilter(param, success, fail) {
-  console.log(param.param);
   searchApi
     .get("dong-code", {
       params: {
