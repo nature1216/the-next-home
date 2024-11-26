@@ -93,7 +93,7 @@ const emailSent = ref(false);
 <script>
 import { signup, sendSignUpEmail, verifySignUpCode } from "@/api/auth.js";
 import AddressSearch from "@/components/AddressSearch.vue";
-import { ref } from "vue";
+import { toast } from "vue3-toastify";
 
 export default {
   components: { AddressSearch },
@@ -114,12 +114,12 @@ export default {
   methods: {
     async handleSignup() {
       if (this.password !== this.confirmPassword) {
-        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        toast.error("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         return;
       }
 
-      if(!this.verified) {
-        alert("이메일 인증이 완료되지 않았습니다.")
+      if (!this.verified) {
+        toast.error("이메일 인증이 완료되지 않았습니다.");
         return;
       }
 
@@ -137,11 +137,11 @@ export default {
         // 회원가입 요청
         const response = await signup(memberData);
         if (response.status === 201) {
-          alert("회원가입이 완료되었습니다.");
+          toast.success("회원가입이 완료되었습니다.")
           this.$router.push({ name: "Login" }); // 회원가입 후 로그인 페이지로 리다이렉트
         }
       } catch (error) {
-        alert("회원가입 중 오류가 발생했습니다.");
+        toast.error("회원가입 중 오류가 발생했습니다.");
       }
     },
     // 인증번호 전송 (추후 수정 필요)
@@ -167,9 +167,9 @@ export default {
           console.log(data);
           if(data) {
             this.verified = true;
-            alert("이메일 인증이 완료되었습니다.");
+            toast.success("이메일 인증이 완료되었습니다.");
           } else {
-            alert("인증번호를 다시 확인해주세요.");
+            toast.error("인증번호를 다시 확인해주세요.");
           }
         },
         (error) => {
