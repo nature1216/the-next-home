@@ -1,5 +1,2 @@
 backend/resources/db/dump.sql filter=lfs diff=lfs merge=lfs -text
-*.sql filter=lfs diff=lfs merge=lfs -text
-frontend/WhereIsMyHome_Final.git/objects/pack/tmp_pack_Tf1b0u filter=lfs diff=lfs merge=lfs -text
-WhereIsMyHome_Final.git/objects/pack/pack-90566a2f193dfed21a28d6a7cde524fd34d5ca86.pack filter=lfs diff=lfs merge=lfs -text
 *.{sql} filter=lfs diff=lfs merge=lfs -text
