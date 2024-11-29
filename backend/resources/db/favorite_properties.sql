@@ -1,10 +1,3 @@
-DROP TABLE IF EXISTS `ssafyhome`.`favorite_properties`;
-
-CREATE TABLE IF NOT EXISTS `ssafyhome`.`favorite_properties`
-(
-    member_id VARCHAR(45) NOT NULL,
-    apt_seq   VARCHAR(20) NOT NULL,
-    PRIMARY KEY (member_id, apt_seq),
-    FOREIGN KEY (member_id) REFERENCES members (id) ON DELETE CASCADE,
-    FOREIGN KEY (apt_seq) REFERENCES house_infos (apt_seq)
-);
+version https://git-lfs.github.com/spec/v1
+oid sha256:3cab030e49c3ae8c4ba3309e2995c4e2d007379d185261429d1df91cefa16334
+size 362

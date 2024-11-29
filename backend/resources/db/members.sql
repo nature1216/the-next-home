@@ -1,10 +1,3 @@
-DROP TABLE IF EXISTS `ssafyhome`.`members`;
-
-create table members
-(
-    id       varchar(45) primary key,
-    password varchar(128) not null,
-    email    varchar(45)  not null unique,
-    role     ENUM ('user', 'admin') DEFAULT 'user',
-    name     varchar(45)
-);
+version https://git-lfs.github.com/spec/v1
+oid sha256:27235191feca66d63b3e228dce7e54eb950b8fe6c3f4cbfe418078fb37ca9a6e
+size 264
