@@ -1,14 +1,14 @@
-# SSAFY12_광주5_관통_Vue.js_3팀_김자연_정현수
+# SSAFY12_광주5_관통_Final_3팀_김자연_정현수
 
 ## :pushpin: 프로젝트 구성
 ### 프로젝트 설명
-WhereIsMyHome 서비스는 사용자에게 편리하게 주택 매물 검색 기능을 기본으로 제공하는 서비스입니다. 본 프로젝트는 Vue.js를 활용하여 프론트엔드를 구현하고, 기존에 개발된 REST API와 연동하는 것을 목표로 합니다. <br>
+The Next Home은 부동산 데이터와 교통 정보를 결합하여, 사용자가 편리하게 주택 매물을 탐색할 수 있는 웹 기반 서비스입니다.<br>
 
 ### 팀 구성
 |이름|역할|
 |:---:|:---:|
-|김자연(팀장)|매물 검색 페이지 구현|
-|정현수|회원 관리(회원가입, 로그인/로그아웃), QnA 페이지 구현|
+|김자연(팀장)|매물 검색 및 필터링, 매물 상세조회, 외부 API 연동, 이메일 인증 개발|
+|정현수|회원관리, QnA 게시판, 관심매물, 인증 프로세스, 거래금액 추이 시각화, 챗봇 시스템 연동|
 
 ### Notion
 https://twisty-stag-36c.notion.site/1309a41b7c4680f6b47ff0426dbb7f18
@@ -26,11 +26,14 @@ https://twisty-stag-36c.notion.site/1309a41b7c4680f6b47ff0426dbb7f18
   <br>
 
 ### ERD
-![image](/uploads/0152eee85de1869c3b9c142fbd1cbc99/image.png)
+![erd](/uploads/25857b388e990be34940d3852b071e2c/erd.png)
+
+### 시스템 구조도
+![시스템_구조도](/uploads/56cd0b8a384dc68953e963f3a7838123/시스템_구조도.png)
 
 ### Figma
-![image](/uploads/b71e0bc4d746670b2a6e04031261ace5/image.png)
-https://www.figma.com/design/pDmPt7Uku5j0OIBwLVzeJB/ssafy-project?node-id=0-1&m=dev&t=eETbAL6Y2r2h5Dcc-1
+![초기화면설계서](/uploads/b2a652eb355eeddadb0f002f3b2183d8/초기화면설계서.png)
+[go to Figma](https://www.figma.com/design/pDmPt7Uku5j0OIBwLVzeJB/ssafy-project?node-id=0-1&m=dev&t=eETbAL6Y2r2h5Dcc-1)
 
 ## :pushpin: API 목록
 ### 회원관리 API
@@ -64,7 +67,7 @@ https://www.figma.com/design/pDmPt7Uku5j0OIBwLVzeJB/ssafy-project?node-id=0-1&m=
 - 답변 삭제
 
 
-## :pushpin: 화면 구성 (추후 gif 추가 예정)
+## :pushpin: 화면 구성
 ### 메인페이지
 ![image](/uploads/73b7e8df166e442c9ebb4c2655d33cc3/image.png)
 
@@ -136,7 +139,7 @@ remove : 파일을 삭제하는 작업만 수행한 경우
 
 1) master branch, develop branch
 
-2) feature branch: 이슈추적 방식 사용
+2) feature branch: 이슈추적 방식 채택
 <br><br>feature/{issue-number}-{feature-name} 
 
 3) release branch
