@@ -35,75 +35,48 @@ https://twisty-stag-36c.notion.site/1309a41b7c4680f6b47ff0426dbb7f18
 ![초기화면설계서](/uploads/b2a652eb355eeddadb0f002f3b2183d8/초기화면설계서.png)
 [go to Figma](https://www.figma.com/design/pDmPt7Uku5j0OIBwLVzeJB/ssafy-project?node-id=0-1&m=dev&t=eETbAL6Y2r2h5Dcc-1)
 
-## :pushpin: API 목록
-### 회원관리 API
-- 회원 정보 조회
-- 회원 정보 수정
-- 회원 삭제
-- 로그인
-- 회원가입
-- 회원 검색
-- 전체 회원 조회
-
-### 관심지역 API
-- 회원별 관심지역 조회
-- 관심지역 추가
-- 관심지역 삭제
-
-### 매물 검색 API
-- 필터링 조건에 따른 주택 매물 목록 조회
-
-### 필터링 조건 API
-- 필터링 조건 조회
-
-### QnA 게시판 API
-- 모든 질문 조회
-- 질문 상세 조회
-- 질문 등록
-- 질문 수정
-- 특정 질문에 대한 모든 답변 조회
-- 답변 등록
-- 답변 수정
-- 답변 삭제
-
-
 ## :pushpin: 화면 구성
 ### 메인페이지
-![image](/uploads/73b7e8df166e442c9ebb4c2655d33cc3/image.png)
+![image](/uploads/7cd9210b63b5baab432800bc13317e75/image.png)
 
 ### 회원 관리
 #### 회원가입
-![image](/uploads/e8e11bca8eff0e1244da22bb70011040/image.png)
+![image](/uploads/64370a31b9e44f4571cbfbca30387a14/image.png)
 
 #### 로그인
-![image](/uploads/25a4665d7f909dd102eca8755b984867/image.png)
+![image](/uploads/2441433deff79cb345a17bbd96d80ce4/image.png)
+
+#### 회원정보 수정
+![image](/uploads/0692fbc1a9076f95008000ed3344e2ed/image.png)
+
+#### 주소지 관리
+![image](/uploads/f7aa9fdeb7b7dc319e73cdd9ed4cf950/image.png)
+![image](/uploads/d69e04b5002a9661382a1f04f1c2d226/image.png)
+![image](/uploads/7a47184e47a2a7fff8d9d6a00eacf1a3/image.png)
 
 ### QnA 게시판
-#### QnA 게시판 조회 - vue 수정 예정
-![image](/uploads/ddff70be26a484f6dbc03c90d91f8a65/image.png)
+#### QnA 게시판 목록
+![image](/uploads/732cc89e223fa4562c3dd839470205e6/image.png)
 
 #### QnA 게시글 등록
-![image](/uploads/601bdc7d98fad9e5f20c2368ab9592a8/image.png)
+![image](/uploads/0d160877221afba459a6a11f62d8f21c/image.png)
 
 #### QnA 게시글 조회 및 답변 등록
-![image](/uploads/d22af8893810188018d25a5d398f700e/image.png)
+![image](/uploads/d0da450d38d114135f5eaba27fa4ed07/image.png)
 
 ### 매물 검색
 #### 메인페이지에서 검색
-![image](/uploads/9cefea09c9729a511e05f81f67bfd013/image.png)<br />
-검색 결과를 클릭하면 해당 지역이나 매물에 해당하는 실거래가 페이지로 이동합니다.
+![image](/uploads/7cd9210b63b5baab432800bc13317e75/image.png)<br />
 
-#### 매물 실거래가 목록 페이지
-![image](/uploads/1e8ad957cc9a3add10c2d12c038aca29/image.png)
+#### 매물 실거래가 목록 및 상세정보
+![image](/uploads/4c7c45c5921bf46a723a87a23437adbf/image.png)
+![image](/uploads/33ce1a52e1b9085ddc83e458f3108ca2/image.png)
+![image](/uploads/827cb4e22d09f2955be641912cf02952/image.png)
+ <br />
 
-#### 매물 실거래가 목록 페이지에서 재검색
-![image](/uploads/c36b8ff782021f450e27e32ae97a75df/image.png)
-![image](/uploads/607b96c7917f5fe9e2b95f6dfd5575d9/image.png)
-
-#### 지역 필터링 검색
-![image](/uploads/16fbae03401a0b14f51b5ab8b1219a6a/image.png)
-![image](/uploads/453098e923e9d874ae406edeff40529a/image.png) <br />
-\* 더 많은 목록이 보이도록 페이지 축소하였습니다.
+### 관심매물
+#### 관심매물 조회 및 삭제
+![image](/uploads/e91cc8155b9741c7db8e94833cc0684f/image.png)
 
 # :pushpin: Commit Convention
 
