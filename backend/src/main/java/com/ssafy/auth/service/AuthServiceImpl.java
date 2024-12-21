@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.util.Objects;
 
+import com.ssafy.redis.RedisService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,6 +36,7 @@ public class AuthServiceImpl implements AuthService {
 
 	//	MailSenderUtil mailSenderUtil;
 	private final SignUpEmailService signUpEmailService;
+	private final RedisService redisService;
 	private final PasswordResetEmailService passwordResetEmailService;
 	private final AddressMapper addressMapper;
 	private final MemberService memberService;
@@ -103,13 +105,14 @@ public class AuthServiceImpl implements AuthService {
 	public String sendSignUpMail(String email) throws MessagingException {
 		String code = signUpEmailService.send(email);
 
-		redisTemplate.opsForValue().set(VERIFICATION_SIGNUP + code, email);
+		redisService.setDataWithExpiration(VERIFICATION_SIGNUP + code, email, signUpExpirationTime);
 		return code;
 	}
 
 	@Override
 	public boolean verifySignUpCode(SignUpVerificationRequest request) {
-		String email = redisTemplate.opsForValue().get(VERIFICATION_SIGNUP + request.getCode());
+		String email = redisService.getData(VERIFICATION_SIGNUP + request.getCode());
+		
 		if (email != null && email.equals(request.getEmail())) {
 			return true;
 		}
@@ -133,15 +136,14 @@ public class AuthServiceImpl implements AuthService {
 
 		String uuid = passwordResetEmailService.send(request.getEmail());
 
-		redisTemplate.opsForValue().set(VERIFICATION_PASSWORD_RESET + uuid, request.getEmail(),
-			Duration.ofMillis(resetPasswordExpirationTime));
+		redisService.setDataWithExpiration(VERIFICATION_PASSWORD_RESET + uuid, request.getEmail(), resetPasswordExpirationTime);
 
 		return uuid;
 	}
 
 	@Override
 	public boolean verifyResetPasswordCode(String uuid) {
-		String email = redisTemplate.opsForValue().get(VERIFICATION_PASSWORD_RESET + uuid);
+		String email = redisService.getData(VERIFICATION_PASSWORD_RESET + uuid);
 		if (email == null) {
 			return false;
 		}

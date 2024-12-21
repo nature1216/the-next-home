@@ -2,6 +2,8 @@ package com.ssafy.auth.controller;
 
 import java.util.Map;
 
+import com.ssafy.redis.RedisService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,6 @@ import com.ssafy.exception.ApiException;
 import com.ssafy.exception.ErrorCode;
 import com.ssafy.member.model.MemberDto;
 import com.ssafy.token.TokenProvider;
-import com.ssafy.token.TokenService;
 import com.ssafy.util.CookieUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,7 +44,10 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthController {
 	private final AuthService authService;
 	private final TokenProvider tokenProvider;
-	private final TokenService tokenService;
+	private final RedisService redisService;
+
+	@Value("${jwt.refresh_expiration_time}")
+	private long refreshTokenExpirationTime;
 
 	@Operation(summary = "로그인", description = "사용자 로그인 처리")
 	@ApiResponses({@ApiResponse(responseCode = "200", description = "로그인 성공"),
@@ -57,7 +61,7 @@ public class AuthController {
 
 			String accessToken = tokenProvider.generateAccessToken(memberDto.getId(), memberDto.getRole());
 			String refreshToken = tokenProvider.generateRefreshToken(memberDto.getId());
-			tokenService.storeRefreshToken(memberDto.getId(), refreshToken);
+			redisService.setDataWithExpiration("refreshToken:" + memberDto.getId(), refreshToken, refreshTokenExpirationTime);
 
 			CookieUtil.addCookie(response, "refreshToken", refreshToken, 7 * 24 * 60 * 60, "/");
 
@@ -117,7 +121,7 @@ public class AuthController {
 	public ResponseEntity<?> logout(HttpServletResponse response, @AuthenticationPrincipal
 	String memberId) {
 		try {
-			tokenService.deleteRefreshToken(memberId);
+			redisService.deleteData(memberId);
 			CookieUtil.deleteCookie(response, "refreshToken", "/");
 			return ResponseEntity.ok().body("로그아웃 성공");
 		} catch (Exception e) {
