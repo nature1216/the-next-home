@@ -67,8 +67,10 @@
 					i.sgg_cd = SUBSTRING(#{code}, 1, 5)
 				</if>
 				<!-- 시까지 선택된 경우 -->
+		        <bind name="prefix" value="code.substring(0,2)"/>
+
 				<if test="code.substring(3, 10) == '00000000'">
-					SUBSTRING(i.sgg_cd, 1, 2) = SUBSTRING(#{code}, 1, 2)
+					i.sgg_cd LIKE concat(prefix, "%")
 				</if>
 			</if>
 		</where>
