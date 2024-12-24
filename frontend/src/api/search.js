@@ -10,6 +10,7 @@ function searchKeyword(param, success, fail) {
         gugunCode: param.gugunCode,
         dongCode: param.dongCode,
         keyword: param.keyword,
+        memberId: param.memberId,
       },
     })
     .then(success)

@@ -64,6 +64,7 @@ const onSearch = () => {
       gugunCode: "",
       dongCode: "",
       keyword: houseDealStore.keyword,
+      memberId: authStore.memberId
     },
     ({ data }) => {
       result.value = data;

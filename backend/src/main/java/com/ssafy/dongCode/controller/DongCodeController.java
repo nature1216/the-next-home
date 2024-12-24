@@ -1,9 +1,12 @@
 package com.ssafy.dongCode.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +21,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -44,17 +49,29 @@ public class DongCodeController {
 	public ResponseEntity<SearchResultResponse> searchByKeyword(@RequestParam("keyword") String keyword,
 			@RequestParam("sidoCode") String sidoCode,
 			@RequestParam("gugunCode") String gugunCode,
-			@RequestParam("dongCode") String dongCode) {
-		
-		SearchRequest request = SearchRequest.builder()
+			@RequestParam("dongCode") String dongCode,
+			@RequestParam(value = "memberId", required=false) String memberId,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		memberId = dongCodeService.getOrCreateGuestMemberId(memberId, request, response);
+
+		SearchRequest searchRequest = SearchRequest.builder()
 				.keyword(keyword)
 				.sidoCode(sidoCode)
 				.gugunCode(gugunCode)
 				.dongCode(dongCode)
 				.build();
-		
-		SearchResultResponse response = dongCodeService.searchByKeyword(request);
-		
-		return ResponseEntity.ok(response);
+
+		dongCodeService.saveRecentSearch(keyword, memberId);
+		SearchResultResponse searchResponse = dongCodeService.searchByKeyword(searchRequest);
+		System.out.println(dongCodeService.getRecentSearchKeywords(memberId));
+		return ResponseEntity.ok(searchResponse);
 	}
+
+	@GetMapping("/recent-searches")
+	public ResponseEntity<List<String>> getRecentSearches(@AuthenticationPrincipal String memberId) {
+		List<String> recentSearches = dongCodeService.getRecentSearchKeywords(memberId);
+		return ResponseEntity.ok(recentSearches);
+	}
+
 }
