@@ -69,7 +69,7 @@ public class DongCodeController {
 	}
 
 	@GetMapping("/recent-searches")
-	public ResponseEntity<List<String>> getRecentSearches(@AuthenticationPrincipal String memberId) {
+	public ResponseEntity<List<String>> getRecentSearches(@RequestParam("memberId") String memberId) {
 		List<String> recentSearches = dongCodeService.getRecentSearchKeywords(memberId);
 		return ResponseEntity.ok(recentSearches);
 	}

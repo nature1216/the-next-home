@@ -13,6 +13,7 @@ import com.ssafy.dongCode.model.mapper.DongCodeMapper;
 import com.ssafy.dongCode.model.request.SearchRequest;
 import com.ssafy.dongCode.model.response.HouseDealSearchResult;
 import com.ssafy.dongCode.model.response.SearchResultResponse;
+import com.ssafy.util.CookieUtil;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -48,22 +49,24 @@ public class DongCodeServiceImpl implements DongCodeService {
 
 	@Override
 	public String getOrCreateGuestMemberId(String memberId, HttpServletRequest request, HttpServletResponse response) {
-		// 비회원 ID가 없을 경우 처리
 		if (memberId == null) {
-			// 세션에서 memberId 찾기
-			memberId = (String) request.getSession().getAttribute("guestMemberId");
+			// 요청에서 쿠키 확인
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if ("guestMemberId".equals(cookie.getName())) {
+						memberId = cookie.getValue();
+						break;
+					}
+				}
+			}
 
+			// 쿠키에도 없으면 새로 생성
 			if (memberId == null) {
-				// 세션에 memberId 없으면 UUID로 고유 ID 생성
 				memberId = UUID.randomUUID().toString();
-				// 세션에 저장
-				request.getSession().setAttribute("guestMemberId", memberId);
 
-				// 쿠키에 저장
-				Cookie cookie = new Cookie("guestMemberId", memberId);
-				cookie.setMaxAge(60 * 60 * 24 * 30);  // 30일 동안 유효
-				cookie.setPath("/");
-				response.addCookie(cookie);
+				// 쿠키 생성 및 클라이언트에 전달
+				CookieUtil.addCookie(response, "guestMemberId", memberId, 60*60*24*30, "/");
 			}
 		}
 		return memberId;
@@ -72,7 +75,6 @@ public class DongCodeServiceImpl implements DongCodeService {
 	@Override
 	public void saveRecentSearch(String keyword, String memberId) {
 		String key = getUserSearchKey(memberId);
-		System.out.println(keyword);
 
 		// 최근 검색어 저장 (중복 제거)
 		redisTemplate.opsForList().remove(key, 1, keyword);
