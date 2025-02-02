@@ -31,6 +31,8 @@ https://twisty-stag-36c.notion.site/1309a41b7c4680f6b47ff0426dbb7f18
 ### 시스템 구조도
 ![시스템구조도](https://github.com/user-attachments/assets/cf6aec1d-a081-4f12-bfa2-26028bebad4d)
 
+### ![화면설계서](https://github.com/nature1216/the-next-home/blob/master/backend/resources/%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C.pdf)
+
 ## :pushpin: 화면 구성
 ### 메인페이지
 ![Image](https://github.com/user-attachments/assets/4f61489f-67a7-48f2-8d9e-6dbb5fc78fca)
