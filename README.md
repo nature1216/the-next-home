@@ -1,4 +1,4 @@
-# SSAFY12_광주5_관통_Final_3팀_김자연_정현수
+# The Next Home
 
 ## :pushpin: 프로젝트 구성
 ### 프로젝트 설명
@@ -26,57 +26,54 @@ https://twisty-stag-36c.notion.site/1309a41b7c4680f6b47ff0426dbb7f18
   <br>
 
 ### ERD
-![erd](/uploads/25857b388e990be34940d3852b071e2c/erd.png)
+![ERD](https://github.com/user-attachments/assets/2711e0af-5aed-4cbb-bda3-122f51ccc609)
 
 ### 시스템 구조도
-![시스템_구조도](/uploads/56cd0b8a384dc68953e963f3a7838123/시스템_구조도.png)
-
-### Figma
-![초기화면설계서](/uploads/b2a652eb355eeddadb0f002f3b2183d8/초기화면설계서.png)
-[go to Figma](https://www.figma.com/design/pDmPt7Uku5j0OIBwLVzeJB/ssafy-project?node-id=0-1&m=dev&t=eETbAL6Y2r2h5Dcc-1)
+![시스템구조도](https://github.com/user-attachments/assets/cf6aec1d-a081-4f12-bfa2-26028bebad4d)
 
 ## :pushpin: 화면 구성
 ### 메인페이지
-![image](/uploads/7cd9210b63b5baab432800bc13317e75/image.png)
+![Image](https://github.com/user-attachments/assets/4f61489f-67a7-48f2-8d9e-6dbb5fc78fca)
 
 ### 회원 관리
 #### 회원가입
-![image](/uploads/64370a31b9e44f4571cbfbca30387a14/image.png)
+![Image](https://github.com/user-attachments/assets/35b203c6-4cbd-4de5-839a-7ce894ea035a)
 
 #### 로그인
-![image](/uploads/2441433deff79cb345a17bbd96d80ce4/image.png)
+![Image](https://github.com/user-attachments/assets/2a309e03-5018-4753-af22-e6a1546b7ba5)
 
 #### 회원정보 수정
-![image](/uploads/0692fbc1a9076f95008000ed3344e2ed/image.png)
+![Image](https://github.com/user-attachments/assets/8f5d7d28-4cc1-4055-899f-0cdde8e1002a)
 
 #### 주소지 관리
-![image](/uploads/f7aa9fdeb7b7dc319e73cdd9ed4cf950/image.png)
-![image](/uploads/d69e04b5002a9661382a1f04f1c2d226/image.png)
-![image](/uploads/7a47184e47a2a7fff8d9d6a00eacf1a3/image.png)
+![Image](https://github.com/user-attachments/assets/04398b61-f7fd-4d1c-9441-ef4ac92c3f9b)
+![Image](https://github.com/user-attachments/assets/bf525837-99bd-420e-8527-9b1d7a237c76)
+![Image](https://github.com/user-attachments/assets/aaa5c0c9-3178-4cdb-b46c-66bb22c04666)
 
 ### QnA 게시판
 #### QnA 게시판 목록
-![image](/uploads/732cc89e223fa4562c3dd839470205e6/image.png)
+![Image](https://github.com/user-attachments/assets/d64f05e5-5792-4b41-9a42-a7b0f016fa2c)
 
 #### QnA 게시글 등록
-![image](/uploads/0d160877221afba459a6a11f62d8f21c/image.png)
+![Image](https://github.com/user-attachments/assets/0c8cc27c-5264-4953-bcdd-f567aa56b5c4)
 
 #### QnA 게시글 조회 및 답변 등록
-![image](/uploads/d0da450d38d114135f5eaba27fa4ed07/image.png)
+![Image](https://github.com/user-attachments/assets/3b687288-096c-4fcf-8b77-e9a2caca250e)
 
 ### 매물 검색
 #### 메인페이지에서 검색
-![image](/uploads/7cd9210b63b5baab432800bc13317e75/image.png)<br />
+![Image](https://github.com/user-attachments/assets/0c8b6034-8e34-4f49-9a03-d26501a5c1e1)<br />
 
 #### 매물 실거래가 목록 및 상세정보
-![image](/uploads/4c7c45c5921bf46a723a87a23437adbf/image.png)
-![image](/uploads/33ce1a52e1b9085ddc83e458f3108ca2/image.png)
-![image](/uploads/827cb4e22d09f2955be641912cf02952/image.png)
+![Image](https://github.com/user-attachments/assets/9029d5c7-e1f8-40a5-896a-5297ab9831e0)
+![Image](https://github.com/user-attachments/assets/f61571c5-04a6-4bb6-9bcf-9d70a0893cd8)
+![Image](https://github.com/user-attachments/assets/a8ac4ac8-5e0c-49bb-b874-52e995dd4f4f)
  <br />
 
 ### 관심매물
 #### 관심매물 조회 및 삭제
-![image](/uploads/e91cc8155b9741c7db8e94833cc0684f/image.png)
+![image](https://github.com/user-attachments/assets/103cd67b-5508-4010-bc73-23c3f413b7b5)
+
 
 # :pushpin: Commit Convention
 
